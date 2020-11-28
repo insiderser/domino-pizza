@@ -16,23 +16,33 @@ class Router {
     }
 
     getCurrentState() {
-        let viewName = ''
-        let endpointName = ''
-        switch (window.location.hash.split('#')[1]) {
-            case 'products':
-                viewName = 'productsPage'
-                endpointName = 'products'
-                break
-            default:
-                viewName = 'homePage'
-                endpointName = 'db'
-                break
+        const hash = window.location.hash.split('#')[1] ?? ''
+
+        let viewName
+        let endpointName = hash
+
+        if (hash.startsWith('categories/')) {
+            viewName = 'categoryPage'
+        } else if (hash.startsWith('products/')) {
+            viewName = 'productDetails'
+        } else if (hash.startsWith('sales/')) {
+            viewName = 'saleDetails'
+        } else if (hash.length === 0) {
+            viewName = 'homePage'
+            endpointName = 'db'
+        } else {
+            console.log(`Unknown route: ${hash}`)
+            this.navigateTo('')
         }
 
         return {
             viewName,
             endpointName,
         }
+    }
+
+    navigateTo(hash) {
+        window.location.hash = hash
     }
 }
 

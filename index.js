@@ -4,7 +4,11 @@ import Router from './router.js'
 
 const router = new Router()
 const templateProcessor = new TemplateProcessor()
-const client = new Client()
+
+const client = new Client({
+    onResourceNotFound: () => router.navigateTo(''),
+    onUnknownError: message => alert(message),
+})
 
 const stateObservable = router.getStateObservable()
 stateObservable.subscribe(({viewName, endpointName}) => {
