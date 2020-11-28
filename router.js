@@ -2,7 +2,7 @@ const {BehaviorSubject} = rxjs
 
 class Router {
     /**
-     * @return {*|Observable}
+     * @return {Observable}
      */
     getStateObservable() {
         const stateSubject = new BehaviorSubject(this.getCurrentState())
