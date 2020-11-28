@@ -1,1 +1,37 @@
-{}
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Pizza Mozzarella",
+      "description": "Delicious Pizza",
+      "price": 155.05,
+      "images": [],
+      "weight": 250,
+      "relatedProductIds": [
+        7,
+        12,
+        98
+      ],
+      "spicy": false,
+      "categoryId": 3
+    }
+  ],
+  "productCategories": [
+    {
+      "id": "1",
+      "name": "Вегетарианские",
+      "description": "More details ... "
+    },
+    {
+      "id": "2",
+      "name": "Category 2",
+      "description": "More details ... "
+    },
+    {
+      "id": "3",
+      "name": "Category 3",
+      "description": "More details ... "
+    }
+  ],
+  "orders": []
+}
