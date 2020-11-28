@@ -24,6 +24,8 @@ class Router {
                 endpointName = 'products'
                 break
             default:
+                viewName = 'homePage'
+                endpointName = 'db'
                 break
         }
 

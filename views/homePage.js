@@ -1,12 +1,12 @@
 import productsListSection from "./productsListSection.js"
 
 /**
- * @param {[Product]} products
+ * @param {HomeData} data
  * @return {string}
  */
-const view = (products) => `
-<div id="products">
-    ${productsListSection(products)}
+const view = (data) => `
+<div id="home">
+    ${productsListSection(data.products)}
 </div>
 `
 
