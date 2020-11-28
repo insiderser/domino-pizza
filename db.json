@@ -5,7 +5,9 @@
       "name": "Pizza Mozzarella",
       "description": "Delicious Pizza",
       "price": 155.05,
-      "images": [],
+      "images": [
+        "https://media.dominos.ua/__sized__/menu/product_osg_image_mobile/2018/02/28/%D0%9F%D0%B5%D0%BF%D0%BF%D0%B5%D1%80%D0%BE%D0%BD%D0%B8_%D0%91%D0%BB%D1%8E%D0%B7_300dpi-thumbnail-960x960-70.jpg"
+      ],
       "weight": 250,
       "relatedProductIds": [
         7,
