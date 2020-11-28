@@ -21,7 +21,7 @@ class Router {
         switch (window.location.hash.split('#')[1]) {
             case 'products':
                 viewName = 'productsPage'
-                endpointName = 'posts'
+                endpointName = 'products'
                 break
             default:
                 break

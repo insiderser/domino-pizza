@@ -1,7 +1,9 @@
+import {BASE_REST_URL} from "./Config.js"
+
 class Client {
     getData(endpoint) {
-        return fetch(`http://my-json-server.typicode.com/zahar-g/test-json/${endpoint}`)
-        .then(response => response.json())
+        return fetch(`${BASE_REST_URL}/${endpoint}`)
+            .then(response => response.json())
     }
 }
 
