@@ -1,4 +1,4 @@
-import {BASE_REST_URL} from "./Config.js"
+const BASE_REST_URL = "https://my-json-server.typicode.com/insiderser/domino-pizza"
 
 class Client {
     getData(endpoint) {
