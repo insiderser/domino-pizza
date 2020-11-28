@@ -1,12 +1,19 @@
 class Product {
-    constructor(id, name, description, price, images, weight, categoryId) {
+    /**
+     * @param {string} id
+     * @param {string} name
+     * @param {string} description
+     * @param {number} price
+     * @param {[string]} images
+     * @param {string} productCategoryId
+     */
+    constructor(id, name, description, price, images, productCategoryId) {
         this.id = id
         this.name = name
         this.description = description
         this.price = price
         this.images = images
-        this.weight = weight
-        this.categoryId = categoryId
+        this.productCategoryId = productCategoryId
     }
 }
 

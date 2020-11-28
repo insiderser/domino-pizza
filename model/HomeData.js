@@ -1,11 +1,11 @@
 class HomeData {
     /**
      * @param {[Product]} products
-     * @param {[ProductCategory]} categories
+     * @param {[ProductCategory]} productCategories
      */
-    constructor(products, categories) {
+    constructor(products, productCategories) {
         this.products = products
-        this.categories = categories
+        this.productCategories = productCategories
     }
 }
 
