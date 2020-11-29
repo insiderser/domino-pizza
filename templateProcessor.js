@@ -1,7 +1,11 @@
 class TemplateProcessor {
+    /**
+     * @param {Node} view
+     */
     render(view) {
         const rootNode = document.getElementById('main')
-        rootNode.innerHTML = view
+        rootNode.innerHTML = ''
+        rootNode.appendChild(view)
     }
 }
 

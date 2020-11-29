@@ -1,27 +1,19 @@
+import {NoResourceFoundError} from "./error.js"
+
 const BASE_REST_URL = "https://my-json-server.typicode.com/insiderser/domino-pizza"
 
 class Client {
 
     /**
-     * @param {function(): void} onResourceNotFound
-     * @param {function(string): void} onUnknownError
+     * @param {string} endpoint
+     * @return {Promise}
      */
-    constructor({onResourceNotFound, onUnknownError}) {
-        this.onResourceNotFound = onResourceNotFound
-        this.onUnknownError = onUnknownError
-    }
-
     getData(endpoint) {
         return fetch(`${BASE_REST_URL}/${endpoint}`)
             .then(response => {
                 if (!response.ok) {
-                    switch (response.status) {
-                        case 404:
-                            this.onResourceNotFound()
-                            break
-
-                        default:
-                            this.onUnknownError(response.statusText)
+                    if (response.status === 404) {
+                        throw new NoResourceFoundError('No resource found ' + endpoint)
                     }
                     throw new Error('Response was not OK: ' + response)
                 }

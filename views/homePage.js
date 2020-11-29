@@ -1,26 +1,42 @@
 import productsListSection from "./productsListSection.js"
+import {parseElementFromString} from "../parser.js"
 
 /**
- * @param {HomeData} data
- * @return {string}
+ * @param {HomeState} data
+ * @param {function(ProductCategoryWithProducts):void} onCategoryClicked
+ * @param {function(Product):void} onProductClicked
+ * @param {function(Product):void} onAddToCartClicked
+ * @return {Element}
  */
-const view = (data) => `
-<div id="categories">
-    ${data.productCategories.map(category => {
-        console.log(category)
-        console.log(data.products)
-        const productsForCategory = data.products.filter(product => product.productCategoryId === category.id)
-        console.log(productsForCategory)
+const view = (data, onCategoryClicked, onProductClicked, onAddToCartClicked) => {
+    const categoriesDom = parseElementFromString(`
+        <div id="categories"></div>
+    `)
 
-        return `
-        <div class="category">
-            <span class="category-title">${category.name}</span>
-            ${productsListSection(productsForCategory)}
-        </div>
-        `
-    })
-    .join('\n')}
-</div>
-`
+    data.categories
+        .map(categoryWithProducts => {
+            const category = categoryWithProducts.category
+            const products = categoryWithProducts.products
+
+            const categoryDom = parseElementFromString(`
+                <div class="category">
+                    <span class="category-title">${category.name}</span>
+                </div>
+            `)
+
+            categoryDom.onclick = (ev) => {
+                onCategoryClicked(categoryWithProducts)
+                ev.stopPropagation()
+            }
+
+            const productsSection = productsListSection(products, onProductClicked, onAddToCartClicked)
+            categoryDom.appendChild(productsSection)
+
+            return categoryDom
+        })
+        .forEach(doc => categoriesDom.appendChild(doc))
+
+    return categoriesDom
+}
 
 export default view
