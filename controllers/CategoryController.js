@@ -1,35 +1,34 @@
 import Controller from "./Controller.js"
-import HomeState from "../entities/HomeState.js"
-import homePage from "../views/homePage.js"
 import NavDestination from "../navigation/NavDestination.js"
 import CategoriesRepository from "../data/CategoriesRepository.js"
+import {NoResourceFoundError} from "../error.js"
+import CategoryState from "../entities/CategoryState.js"
+import categoryPage from "../views/categoryPage.js"
 
-class HomeController extends Controller {
+class CategoryController extends Controller {
 
     constructor(router, args, categoriesRepository = new CategoriesRepository()) {
-        super(router, args, new HomeState({isLoading: true, categories: Array()}))
+        super(router, args, new CategoryState({isLoading: true, category: null}))
 
-        categoriesRepository.getCategoriesWithProducts()
+        categoriesRepository.getCategory(args)
             .then(data => this.updateState(state => {
                 state.isLoading = false
-                state.categories = data
+                state.category = data
                 return state
             }))
-            .catch(err => alert(err.message))
+            .catch(err => {
+                alert(err.message)
+                if (err instanceof NoResourceFoundError) {
+                    router.navigateTo(NavDestination.home())
+                }
+            })
     }
 
     /**
-     * @param {HomeState} state
+     * @param {CategoryState} state
      * @return {Element}
      */
     renderState(state) {
-        /**
-         * @param {ProductCategoryWithProducts} categoryWithProducts
-         */
-        const onCategoryClicked = categoryWithProducts => {
-            this.router.navigateTo(NavDestination.category(categoryWithProducts.category.id))
-        }
-
         /**
          * @param {Product} product
          */
@@ -44,8 +43,8 @@ class HomeController extends Controller {
             // TODO
         }
 
-        return homePage(state, onCategoryClicked, onProductClicked, onAddToCartClicked)
+        return categoryPage(state, onProductClicked, onAddToCartClicked)
     }
 }
 
-export default HomeController
+export default CategoryController

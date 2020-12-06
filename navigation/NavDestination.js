@@ -1,7 +1,8 @@
 class NavDestination {
-    constructor(hash, controllerName) {
+    constructor(hash, controllerName, args = null) {
         this.hash = hash
         this.controllerName = controllerName
+        this.args = args
     }
 
     static home() {
@@ -9,11 +10,11 @@ class NavDestination {
     }
 
     static category(categoryId) {
-        return new NavDestination(`categories/${categoryId}`, 'CategoryController')
+        return new NavDestination(`categories/${categoryId}`, 'CategoryController', categoryId)
     }
 
     static product(productId) {
-        return new NavDestination(`products/${productId}`, 'ProductController')
+        return new NavDestination(`products/${productId}`, 'ProductController', productId)
     }
 
     /**

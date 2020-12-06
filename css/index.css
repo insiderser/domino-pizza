@@ -1,0 +1,15 @@
+.product-item {
+    width: 33%;
+    padding: 10px;
+}
+
+.product-image {
+    width: 100%;
+}
+
+.center-on-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -8,7 +8,7 @@ import {parseElementFromString} from "../parser.js"
  */
 const view = (products, onProductClicked, onAddToCartClicked) => {
     const productsListSection = parseElementFromString(`
-        <div class="productsListSection"></div>
+        <div class="productsListSection row"></div>
     `)
 
     products
@@ -26,11 +26,13 @@ const view = (products, onProductClicked, onAddToCartClicked) => {
  */
 function productItem(product, onProductClicked, onAddToCartClicked) {
     const productItemDocument = parseElementFromString(`
-            <div class="product-item">
-                <img class="product-image" src="${product.images[0]}" alt="">
-                <span class="product-name">${product.id}</span>
-                <span class="product-desc">${product.name}</span>
+            <div class="product-item col-md-4 col-sm-6 col-12 card justify-content-between">
                 <div>
+                    <img class="product-image" src="${product.images[0]}" alt="">
+                    <span class="product-name h6">${product.name}</span>
+                    <span class="product-desc">${product.description}</span>
+                </div>
+                <div class="d-flex flex-row justify-content-between">
                     <span class="product-price">${product.price} <span class="product-price-currency">uah</span></span>
                     <button class="add-to-cart">To cart</button>
                 </div>

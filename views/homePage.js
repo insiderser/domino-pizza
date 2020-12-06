@@ -1,21 +1,30 @@
 import productsListSection from "./productsListSection.js"
 import {parseElementFromString} from "../parser.js"
+import loadingIndicator from "./loadingIndicator.js"
 
 /**
- * @param {HomeState} data
+ * @param {HomeState} state
  * @param {function(ProductCategoryWithProducts):void} onCategoryClicked
  * @param {function(Product):void} onProductClicked
  * @param {function(Product):void} onAddToCartClicked
  * @return {Element}
  */
-const view = (data, onCategoryClicked, onProductClicked, onAddToCartClicked) => {
+const view = (state, onCategoryClicked, onProductClicked, onAddToCartClicked) => {
+    if (state.isLoading) {
+        return loadingIndicator()
+    }
+
     const categoriesDom = parseElementFromString(`
-        <div id="categories"></div>
+        <div id="categories" class="container">
+            <div class="row">
+                
+            </div>
+        </div>
     `)
 
-    data.categories
+    state.categories
         .map(categoryWithProducts => categoryItem(categoryWithProducts, onCategoryClicked, onProductClicked, onAddToCartClicked))
-        .forEach(doc => categoriesDom.appendChild(doc))
+        .forEach(doc => categoriesDom.getElementsByClassName("row")[0].appendChild(doc))
 
     return categoriesDom
 }
@@ -32,8 +41,8 @@ function categoryItem(categoryWithProducts, onCategoryClicked, onProductClicked,
     const products = categoryWithProducts.products
 
     const categoryDom = parseElementFromString(`
-            <div class="category">
-                <span class="category-title">${category.name}</span>
+            <div class="category col-12 container">
+                <span class="category-title h4">${category.name}</span>
             </div>
         `)
 

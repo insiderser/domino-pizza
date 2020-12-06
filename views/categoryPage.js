@@ -1,19 +1,24 @@
 import productsListSection from "./productsListSection.js"
 import {parseElementFromString} from "../parser.js"
+import loadingIndicator from "./loadingIndicator.js"
 
 /**
- * @param {ProductCategoryWithProducts} categoryWithProducts
+ * @param {CategoryState} state
  * @param {function(Product):void} onProductClicked
  * @param {function(Product):void} onAddToCartClicked
  * @return {Element}
  */
-const view = (categoryWithProducts, onProductClicked, onAddToCartClicked) => {
-    const category = categoryWithProducts.category
-    const products = categoryWithProducts.products
+const view = (state, onProductClicked, onAddToCartClicked) => {
+    if (state.isLoading) {
+        return loadingIndicator()
+    }
+
+    const category = state.category.category
+    const products = state.category.products
 
     const categoryDom = parseElementFromString(`
-        <div class="category">
-            <span class="category-title">${category.name}</span>
+        <div class="category container d-flex flex-column">
+            <span class="category-title h4">${category.name}</span>
             <span class="category-description">${category.description}</span>
         </div>
     `)

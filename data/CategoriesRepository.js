@@ -1,7 +1,7 @@
-import Client from "../client.js"
-import ProductCategoryWithProducts from "../model/ProductCategoryWithProducts.js"
-import Product from "../model/Product.js"
-import ProductCategory from "../model/ProductCategory.js"
+import Client from "./client.js"
+import ProductCategoryWithProducts from "../entities/ProductCategoryWithProducts.js"
+import Product from "../entities/Product.js"
+import ProductCategory from "../entities/ProductCategory.js"
 
 class CategoriesRepository {
     constructor(client = new Client()) {
@@ -26,6 +26,18 @@ class CategoriesRepository {
 
             return new ProductCategoryWithProducts(category, products)
         })
+    }
+
+    /**
+     * @param {string} categoryId
+     * @return {Promise<ProductCategoryWithProducts>}
+     */
+    getCategory(categoryId) {
+        return this.client.getData(`productCategories/${categoryId}?_embed=products`)
+            .then(data => new ProductCategoryWithProducts(
+                new ProductCategory(data.id, data.name, data.description),
+                data.products,
+            ))
     }
 }
 

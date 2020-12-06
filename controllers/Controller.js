@@ -4,9 +4,10 @@ const {map} = rxjs.operators
 class Controller {
     /**
      * @param {Router} router
+     * @param {null|any} args
      * @param {any} initialState
      */
-    constructor(router, initialState) {
+    constructor(router, args, initialState) {
         if (this.constructor === Controller) {
             throw new Error("Abstract classes can't be instantiated.")
         }
