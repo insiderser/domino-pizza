@@ -1,3 +1,19 @@
+html, body {
+    height: 100%;
+}
+
+#main {
+    min-height: 70%;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    margin-top: 10%;
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
 .product-item {
     width: 33%;
     padding: 10px;
