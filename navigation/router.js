@@ -37,6 +37,7 @@ class Router {
      * @param {NavDestination} destination
      */
     navigateTo(destination) {
+        scrollTo(0, 0)
         window.location.hash = destination.hash
     }
 }
