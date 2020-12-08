@@ -3,6 +3,8 @@ const {BehaviorSubject} = rxjs
 const CART_KEY = "cart"
 
 const CartLocalStorage = {
+    getCart: () => getCart(),
+
     /**
      * @return {Observable}
      */
@@ -10,11 +12,14 @@ const CartLocalStorage = {
 
     /**
      * @param {string} itemId
-     * @param {number} quantity
      */
-    addOrUpdate: (itemId, quantity) => {
+    addToCart: (itemId) => {
         const cart = getCart()
-        cart[itemId] = quantity
+        if (cart[itemId]) {
+            cart[itemId]++
+        } else {
+            cart[itemId] = 1
+        }
         saveCart(cart)
     },
 

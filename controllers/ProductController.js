@@ -42,7 +42,7 @@ class CategoryController extends Controller {
          * @param {Product} product
          */
         const onAddToCartClicked = product => {
-            this.cartRepository.addProduct(product, 1)
+            this.cartRepository.addProduct(product)
         }
 
         return productPage(state, onRelatedProductClicked, onAddToCartClicked)

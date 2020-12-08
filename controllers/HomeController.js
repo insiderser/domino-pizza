@@ -43,7 +43,7 @@ class HomeController extends Controller {
          * @param {Product} product
          */
         const onAddToCartClicked = product => {
-            this.cartRepository.addProduct(product, 1)
+            this.cartRepository.addProduct(product)
         }
 
         return homePage(state, onCategoryClicked, onProductClicked, onAddToCartClicked)

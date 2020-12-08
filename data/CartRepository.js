@@ -13,15 +13,18 @@ class CartRepository {
      */
     getProductsCount() {
         return this.storage.asObservable()
-            .pipe(map(cart => Object.keys(cart).length))
+            .pipe(map(cart =>
+                Object.keys(cart)
+                    .map(key => cart[key])
+                    .reduce((first, second) => first + second, 0)
+            ))
     }
 
     /**
      * @param {Product} product
-     * @param {number} quantity
      */
-    addProduct(product, quantity) {
-        this.storage.addOrUpdate(product.id, quantity)
+    addProduct(product) {
+        this.storage.addToCart(product.id)
     }
 }
 
