@@ -17,6 +17,10 @@ class NavDestination {
         return new NavDestination(`products/${productId}`, 'ProductController', productId)
     }
 
+    static cart() {
+        return new NavDestination('cart', 'CartController')
+    }
+
     /**
      * @param {string} hash
      * @return {null|NavDestination}

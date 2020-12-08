@@ -3,11 +3,13 @@ import HomeState from "../entities/HomeState.js"
 import homePage from "../views/homePage.js"
 import NavDestination from "../navigation/NavDestination.js"
 import CategoriesRepository from "../data/CategoriesRepository.js"
+import CartRepository from "../data/CartRepository.js"
 
 class HomeController extends Controller {
 
-    constructor(router, args, categoriesRepository = new CategoriesRepository()) {
+    constructor(router, args, categoriesRepository = new CategoriesRepository(), cartRepository = new CartRepository()) {
         super(router, args, new HomeState({isLoading: true, categories: Array()}))
+        this.cartRepository = cartRepository
 
         categoriesRepository.getCategoriesWithProducts()
             .then(data => this.updateState(state => {
@@ -41,7 +43,7 @@ class HomeController extends Controller {
          * @param {Product} product
          */
         const onAddToCartClicked = product => {
-            // TODO
+            this.cartRepository.addProduct(product, 1)
         }
 
         return homePage(state, onCategoryClicked, onProductClicked, onAddToCartClicked)

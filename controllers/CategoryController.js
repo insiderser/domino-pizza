@@ -4,11 +4,13 @@ import CategoriesRepository from "../data/CategoriesRepository.js"
 import {NoResourceFoundError} from "../error.js"
 import CategoryState from "../entities/CategoryState.js"
 import categoryPage from "../views/categoryPage.js"
+import CartRepository from "../data/CartRepository.js"
 
 class CategoryController extends Controller {
 
-    constructor(router, args, categoriesRepository = new CategoriesRepository()) {
+    constructor(router, args, categoriesRepository = new CategoriesRepository(), cartRepository = new CartRepository()) {
         super(router, args, new CategoryState({isLoading: true, category: null}))
+        this.cartRepository = cartRepository
 
         categoriesRepository.getCategory(args)
             .then(data => this.updateState(state => {
@@ -40,7 +42,7 @@ class CategoryController extends Controller {
          * @param {Product} product
          */
         const onAddToCartClicked = product => {
-            // TODO
+            this.cartRepository.addProduct(product, 1)
         }
 
         return categoryPage(state, onProductClicked, onAddToCartClicked)
