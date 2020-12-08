@@ -1,5 +1,5 @@
-import productsListSection from "./productsListSection.js"
 import {parseElementFromString} from "../parser.js"
+import productsListSection from "./productsListSection.js"
 
 /**
  * @param {[Product]} relatedProducts

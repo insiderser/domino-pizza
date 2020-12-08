@@ -1,3 +1,4 @@
+import CartItem from '../entities/CartItem.js'
 import CartLocalStorage from "./CartLocalStorage.js"
 
 const {map} = rxjs.operators
@@ -6,6 +7,17 @@ class CartRepository {
 
     constructor(storage = CartLocalStorage) {
         this.storage = storage
+        localStorage.c
+    }
+
+    /**
+     * @return {Observable<[CartItem]>}
+     */
+    getCartItems() {
+        return this.storage.asObservable()
+            .pipe(map(cart =>
+                Object.keys(cart).map(key => new CartItem(key, cart[key]))
+            ))
     }
 
     /**
@@ -21,10 +33,17 @@ class CartRepository {
     }
 
     /**
-     * @param {Product} product
+     * @param {string} productId
      */
-    addProduct(product) {
-        this.storage.addToCart(product.id)
+    addProduct(productId) {
+        this.storage.addOrIncrement(productId)
+    }
+
+    /**
+     * @param {string} productId
+     */
+    removeProduct(productId) {
+        this.storage.removeOrDecrement(productId)
     }
 }
 

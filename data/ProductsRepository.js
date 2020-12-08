@@ -1,10 +1,17 @@
-import Client from "./client.js"
-import {NoResourceFoundError} from "../error.js"
 import ProductWithRelatedProducts from "../entities/ProductWithRelatedProducts.js"
+import {NoResourceFoundError} from "../error.js"
+import Client from "./client.js"
 
 class ProductsRepository {
     constructor(client = new Client()) {
         this.client = client
+    }
+
+    /**
+     * @return {Promise<[Product]>}
+     */
+    getAllProducts() {
+        return this.client.getData(`products`)
     }
 
     /**
@@ -35,7 +42,7 @@ class ProductsRepository {
     }
 
     /**
-     * @param {Product} products
+     * @param {[Product]} products
      * @return {Map<string, Product>}
      */
     associateProductsByIds(products) {

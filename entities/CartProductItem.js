@@ -1,9 +1,9 @@
-class CartItem {
+class CartProductItem {
     /**
-     * @param {string} productId
+     * @param {Product} product
      * @param {number} quantity
      */
-    constructor(productId, quantity) {
+    constructor(product, quantity) {
         if (quantity <= 0) {
             throw new RangeError('Quantity has to be positive')
         }
@@ -11,9 +11,9 @@ class CartItem {
             throw new RangeError('Quantity has to be an integer')
         }
 
-        this.productId = productId
+        this.product = product
         this.quantity = quantity
     }
 }
 
-export default CartItem
+export default CartProductItem

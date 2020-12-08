@@ -21,6 +21,11 @@ class NavDestination {
         return new NavDestination('cart', 'CartController')
     }
 
+    static order() {
+        // TODO: implement
+        return new NavDestination('order', 'OrderController')
+    }
+
     /**
      * @param {string} hash
      * @return {null|NavDestination}
@@ -36,6 +41,12 @@ class NavDestination {
         if (/^products\/\d+$/.test(hash)) {
             const id = hash.split('/')[1]
             return this.product(id)
+        }
+        if (/^cart\/?$/.test(hash)) {
+            return this.cart()
+        }
+        if (/^order\/?$/.test(hash)) {
+            return this.order()
         }
 
         return null

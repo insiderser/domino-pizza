@@ -1,9 +1,9 @@
-import Controller from "./Controller.js"
-import HomeState from "../entities/HomeState.js"
-import homePage from "../views/homePage.js"
-import NavDestination from "../navigation/NavDestination.js"
-import CategoriesRepository from "../data/CategoriesRepository.js"
 import CartRepository from "../data/CartRepository.js"
+import CategoriesRepository from "../data/CategoriesRepository.js"
+import HomeState from "../entities/HomeState.js"
+import NavDestination from "../navigation/NavDestination.js"
+import homePage from "../views/homePage.js"
+import Controller from "./Controller.js"
 
 class HomeController extends Controller {
 
@@ -43,7 +43,7 @@ class HomeController extends Controller {
          * @param {Product} product
          */
         const onAddToCartClicked = product => {
-            this.cartRepository.addProduct(product)
+            this.cartRepository.addProduct(product.id)
         }
 
         return homePage(state, onCategoryClicked, onProductClicked, onAddToCartClicked)

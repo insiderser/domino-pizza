@@ -13,7 +13,7 @@ const CartLocalStorage = {
     /**
      * @param {string} itemId
      */
-    addToCart: (itemId) => {
+    addOrIncrement: (itemId) => {
         const cart = getCart()
         if (cart[itemId]) {
             cart[itemId]++
@@ -26,13 +26,17 @@ const CartLocalStorage = {
     /**
      * @param {number} itemId
      */
-    remove: (itemId) => {
+    removeOrDecrement: (itemId) => {
         const cart = getCart()
-        cart[itemId] = undefined
+        if (cart[itemId] > 1) {
+            cart[itemId]--
+        } else {
+            delete cart[itemId]
+        }
         saveCart(cart)
     },
 
-    clear: () => saveCart({}),
+    clear: () => saveCart({})
 }
 
 const cartsSubject = new BehaviorSubject(getCart())

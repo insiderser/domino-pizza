@@ -1,10 +1,10 @@
-import Controller from "./Controller.js"
-import NavDestination from "../navigation/NavDestination.js"
-import CategoriesRepository from "../data/CategoriesRepository.js"
-import {NoResourceFoundError} from "../error.js"
-import CategoryState from "../entities/CategoryState.js"
-import categoryPage from "../views/categoryPage.js"
 import CartRepository from "../data/CartRepository.js"
+import CategoriesRepository from "../data/CategoriesRepository.js"
+import CategoryState from "../entities/CategoryState.js"
+import {NoResourceFoundError} from "../error.js"
+import NavDestination from "../navigation/NavDestination.js"
+import categoryPage from "../views/categoryPage.js"
+import Controller from "./Controller.js"
 
 class CategoryController extends Controller {
 
@@ -42,7 +42,7 @@ class CategoryController extends Controller {
          * @param {Product} product
          */
         const onAddToCartClicked = product => {
-            this.cartRepository.addProduct(product)
+            this.cartRepository.addProduct(product.id)
         }
 
         return categoryPage(state, onProductClicked, onAddToCartClicked)

@@ -1,6 +1,6 @@
-import productsListSection from "./productsListSection.js"
 import {parseElementFromString} from "../parser.js"
 import loadingIndicator from "./loadingIndicator.js"
+import productsListSection from "./productsListSection.js"
 
 /**
  * @param {HomeState} state
