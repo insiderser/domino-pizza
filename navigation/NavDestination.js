@@ -22,8 +22,12 @@ class NavDestination {
     }
 
     static order() {
-        // TODO: implement
         return new NavDestination('order', 'OrderController')
+    }
+
+    static orderDetails(orderId) {
+        // TODO: implement. Order details info should be passed as a parameter.
+        return new NavDestination(`order/${orderId}`, 'OrderDetailsController', orderId)
     }
 
     /**
@@ -47,6 +51,10 @@ class NavDestination {
         }
         if (/^order\/?$/.test(hash)) {
             return this.order()
+        }
+        if (/^order\/\d+$/.test(hash)) {
+            const id = hash.split('/')[1]
+            return this.orderDetails(id)
         }
 
         return null

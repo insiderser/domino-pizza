@@ -7,7 +7,6 @@ class CartRepository {
 
     constructor(storage = CartLocalStorage) {
         this.storage = storage
-        localStorage.c
     }
 
     /**
@@ -44,6 +43,10 @@ class CartRepository {
      */
     removeProduct(productId) {
         this.storage.removeOrDecrement(productId)
+    }
+
+    clear() {
+        this.storage.clear()
     }
 }
 

@@ -24,7 +24,7 @@ const CartLocalStorage = {
     },
 
     /**
-     * @param {number} itemId
+     * @param {string} itemId
      */
     removeOrDecrement: (itemId) => {
         const cart = getCart()

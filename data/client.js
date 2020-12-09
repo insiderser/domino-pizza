@@ -21,6 +21,28 @@ class Client {
                 return response.json()
             })
     }
+
+    /**
+     * @param {string} endpoint
+     * @param {any} body
+     * @return {Promise}
+     */
+    postData(endpoint, body = {}) {
+        return fetch(`${BASE_REST_URL}/${endpoint}`, {
+            method: 'POST',
+            body: JSON.stringify(body)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new NoResourceFoundError('No resource found ' + endpoint)
+                    }
+                    throw new Error('Response was not OK: ' + response)
+                }
+
+                return response.json()
+            })
+    }
 }
 
 export default Client
